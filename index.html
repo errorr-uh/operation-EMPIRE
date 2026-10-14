@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=3">
+<link rel="shortcut icon" type="image/png" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" href="/favicon.png?v=3">
+<title>Operation @EMPÍRE</title>
+<style>
+:root{--bg:#080808;--panel:#111;--panel2:#151515;--line:#242424;--text:#f2f2f2;--muted:#8d8d8d;--blue:#4b8dff;--blue2:#2f6ff0;--green:#20d66b;--yellow:#ffc72c;--red:#ff4d5b;--purple:#a879ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5}a{color:inherit}.container{width:min(1120px,calc(100% - 40px));margin:auto}
+header{min-height:74vh;display:flex;align-items:center;border-bottom:1px solid #151515;background:radial-gradient(circle at 50% 35%,rgba(62,116,255,.10),transparent 38%),linear-gradient(180deg,#0a0a0a 0%,#080808 100%)}.hero{padding:90px 0 80px}.badge{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid #252525;border-radius:999px;color:#aaa;background:#101010;font-size:13px;font-weight:600}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px rgba(32,214,107,.65)}h1{font-size:clamp(44px,8vw,92px);letter-spacing:-.055em;line-height:.95;margin:25px 0 20px;font-weight:800}h1 span{color:#777}.hero p{max-width:690px;color:#999;font-size:18px;margin:0 0 30px}.actions{display:flex;gap:12px;flex-wrap:wrap}
+button,.btn{border:1px solid #2a2a2a;background:#121212;color:#eee;border-radius:10px;padding:13px 18px;font-size:15px;font-weight:650;cursor:pointer;text-decoration:none;transition:.2s}button:hover,.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.btn.primary,button.primary{background:var(--blue2);border-color:var(--blue2)}
+section{padding:78px 0}.section-head{margin-bottom:28px}.eyebrow{color:#777;font-size:12px;text-transform:uppercase;letter-spacing:.15em;font-weight:800}h2{font-size:36px;letter-spacing:-.035em;margin:8px 0}.sub{color:#888;margin:0;max-width:720px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.stat{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:24px}.stat .number{font-size:32px;font-weight:750;letter-spacing:-.03em}.stat .label{color:#858585;margin-top:4px}
+.platform{border:1px solid var(--line);background:linear-gradient(145deg,#151515,#0e0e0e);border-radius:16px;padding:26px;display:flex;align-items:center;gap:18px}.discord-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:#5865f2;color:#fff;font-size:30px;font-weight:900}.platform h3{margin:0;font-size:20px}.platform p{margin:4px 0 0;color:#888}
+.panel{border:1px solid var(--line);background:#0f0f0f;border-radius:15px;overflow:hidden}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.tab{background:#111;border:1px solid #292929;color:#888;border-radius:999px;padding:10px 16px;font-weight:650}.tab.active{background:#5865f2;border-color:#5865f2;color:#fff}
+.toolbar{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:12px;padding:18px;border-bottom:1px solid var(--line)}select,input{width:100%;height:42px;border-radius:8px;border:1px solid #292929;background:#111;color:#ddd;padding:0 12px;outline:none}select:focus,input:focus{border-color:#5865f2}
+.status{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:750}.pending{background:rgba(255,199,44,.13);color:var(--yellow)}.under-review{background:rgba(75,141,255,.13);color:#72a9ff}.action-required{background:rgba(168,121,255,.13);color:var(--purple)}.approved,.reviewed{background:rgba(32,214,107,.12);color:var(--green)}.completed{background:rgba(32,214,107,.18);color:#55ef92}.rejected{background:rgba(255,77,91,.12);color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.archive-card{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:25px}.archive-top{display:flex;align-items:center;gap:15px;margin-bottom:15px}.archive-icon{width:48px;height:48px;border-radius:13px;background:#5865f2;display:grid;place-items:center;font-weight:900;font-size:22px}.archive-card h3{margin:0;font-size:17px}.archive-card .big{font-size:25px;margin-top:14px}.archive-card .small{color:#777;font-size:13px}.archive-card .range{color:#555;font-size:12px;margin-top:12px}
+.report-box{border:1px solid #252525;background:#101010;border-radius:16px;padding:28px;display:flex;justify-content:space-between;align-items:center;gap:24px}.report-box h3{margin:0 0 6px;font-size:22px}.report-box p{margin:0;color:#888}.live{display:inline-flex;align-items:center;gap:9px;color:#27d66d;font-weight:750;text-transform:uppercase;letter-spacing:.12em;font-size:13px}.live .dot{width:9px;height:9px}
+footer{border-top:1px solid #151515;padding:35px 0;color:#666;font-size:13px}footer strong{color:#999}.secret-link{cursor:pointer;color:#999;text-decoration:none}.secret-link:hover{color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modal-box{width:min(560px,100%);background:#111;border:1px solid #292929;border-radius:16px;padding:25px;box-shadow:0 25px 80px rgba(0,0,0,.5)}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h3{margin:0;font-size:23px}.close{border:0;background:#1a1a1a;width:38px;height:38px;padding:0}.form{display:grid;gap:13px;margin-top:20px}.form textarea,.report-form textarea,.reply-textarea{width:100%;min-height:120px;resize:vertical;border:1px solid #292929;border-radius:8px;background:#0d0d0d;color:#ddd;padding:12px;font:inherit;outline:none}.notice{font-size:12px;color:#666;margin-top:5px}.toast{position:fixed;right:20px;bottom:20px;background:#151515;border:1px solid #303030;padding:13px 16px;border-radius:10px;display:none;z-index:80;color:#ddd;max-width:380px}.toast.show{display:block}
+.report-builder{padding:0}.report-mode{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:17px;border-bottom:1px solid var(--line);background:#101010}.mode-label{color:#777;font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;margin-right:5px}.mode{padding:9px 13px;border-radius:8px}.mode.active{background:#5865f2;border-color:#5865f2;color:#fff}.report-form{padding:22px;display:grid;gap:18px}.service-fields{display:grid;gap:16px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:grid;gap:7px;color:#aaa;font-size:13px;font-weight:650}.report-form textarea{min-height:125px}.safe-notice{border:1px solid rgba(255,199,44,.22);background:rgba(255,199,44,.06);color:#c6a94e;border-radius:9px;padding:12px 14px;font-size:13px}.safe-notice strong{color:#f0c94d}.upload-box{border:1px dashed #303030;border-radius:11px;padding:17px;display:grid;gap:13px}.upload-box p{margin:3px 0 0;color:#666;font-size:12px}.upload-btn{display:inline-flex;width:max-content;background:#181818;border:1px solid #303030;border-radius:8px;padding:10px 13px;color:#ddd;cursor:pointer}.preview-grid{display:flex;flex-wrap:wrap;gap:10px}.preview{position:relative;width:110px;height:85px;border:1px solid #292929;border-radius:8px;overflow:hidden;background:#0b0b0b}.preview img{width:100%;height:100%;object-fit:cover}.preview button{position:absolute;right:4px;top:4px;width:24px;height:24px;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.75);color:#fff}.submit-row{display:flex;justify-content:space-between;align-items:center;gap:20px}.submit-row .notice{max-width:690px;line-height:1.5}
+.admin-hidden{display:none}.admin-section{padding-top:40px}.admin-actions{display:flex;gap:8px;flex-wrap:wrap}.small-btn{padding:8px 11px;border-radius:8px;font-size:12px}.danger{background:#351216;border-color:#5a1d24;color:#ff7b85}.success{background:#102d1d;border-color:#1e633a;color:#59e891}.report-detail{white-space:normal;max-width:700px;line-height:1.45;color:#bbb}.admin-card{border:1px solid var(--line);background:#0f0f0f;border-radius:15px;padding:18px;margin-bottom:12px}.admin-card-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.admin-meta{color:#777;font-size:12px}.empty{padding:35px;text-align:center;color:#666}.reply-box{margin-top:15px;border-top:1px solid #222;padding-top:15px}.reply-textarea{min-height:90px}.admin-edit-grid{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:start;margin-top:14px}.track-panel{border:1px solid var(--line);background:#0f0f0f;border-radius:15px;padding:20px}.track-form{display:grid;grid-template-columns:1fr auto;gap:10px}.track-result{margin-top:15px}.track-card{border:1px solid #282828;background:#111;border-radius:12px;padding:18px}.track-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.track-id{font-size:12px;color:#666;margin-top:4px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.track-reply{margin-top:17px;border:1px solid #292929;background:#0c0c0c;border-radius:10px;padding:15px}.track-reply .label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#777;font-weight:800;margin-bottom:7px}.track-reply .text{color:#ddd;white-space:pre-wrap}.copy-btn{padding:8px 11px;font-size:12px}.security-line{border:1px solid #222;background:#0d0d0d;border-radius:9px;padding:10px 12px;color:#777;font-size:12px;margin-top:12px}
+@media(max-width:760px){.container{width:min(100% - 28px,1120px)}header{min-height:auto}.hero{padding:70px 0}.hero p{font-size:16px}section{padding:55px 0}.stats{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr 1fr}.report-box{align-items:flex-start;flex-direction:column}.admin-card-top{flex-direction:column}.admin-edit-grid{grid-template-columns:1fr}.track-form{grid-template-columns:1fr}}
+@media(max-width:480px){h1{font-size:48px}.toolbar{grid-template-columns:1fr}.field-grid{grid-template-columns:1fr}.submit-row{flex-direction:column;align-items:stretch}.submit-row button{width:100%}.track-head{flex-direction:column}}
+.pick-label{color:#777;font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;margin-bottom:9px}.chips{display:flex;gap:10px;flex-wrap:wrap}.chip{border-radius:10px;padding:11px 16px}.chip.active{background:#5865f2;border-color:#5865f2;color:#fff}
+
+.public-table-panel{overflow:hidden}.table-scroll{width:100%;overflow-x:auto}.public-report-table{border-collapse:collapse;width:100%;min-width:760px;text-align:left}.public-report-table th,.public-report-table td{padding:13px 15px;border-bottom:1px solid #222;color:#999;vertical-align:top;font-size:13px}.public-report-table th{color:#777;text-transform:uppercase;letter-spacing:.08em;font-size:11px;background:#111}.public-report-table td:first-child{white-space:nowrap}.public-report-table td:nth-child(5){max-width:330px;overflow-wrap:anywhere;color:#bbb}.public-filters{grid-template-columns:1fr 1fr 1fr 1fr}.public-filters label{font-size:11px;text-transform:uppercase;letter-spacing:.08em}.public-filters input,.public-filters select{margin-top:5px;text-transform:none;letter-spacing:normal;font-size:13px}.pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 18px;color:#777;font-size:12px}.pagination div{display:flex;gap:7px}.pagination button{padding:8px 12px;font-size:12px}.expertise-chips .chip.active{background:#5865f2;border-color:#5865f2;color:#fff}
+@media(max-width:760px){.public-filters{grid-template-columns:1fr 1fr}.pagination{align-items:flex-start;flex-direction:column}}
+</style>
+<style>.field-note{display:block;margin-top:6px;font-size:12px;font-weight:400;color:#8b8f98;line-height:1.5}.pub-reply{margin-top:6px;padding:7px 10px;border-left:2px solid var(--blue,#4b8dff);background:rgba(75,141,255,.08);border-radius:6px;font-size:12px;color:#aab}.vis-pill{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.08em;border:1px solid rgba(255,255,255,.18)}</style>
+</head>
+<body>
+
+<header>
+  <div class="container hero">
+    <div class="badge"><span class="dot"></span> LIVE FEED &nbsp; · &nbsp; Operation @EMPÍRE</div>
+    <h1>Operation <span>@EMPÍRE</span></h1>
+    <p>A focused online-content reporting and archive dashboard for Discord submissions. Browse reports, review their status, and track an individual submission using its private report ID.</p>
+    <div class="actions">
+      <a class="btn primary" href="#reports">Browse Reports →</a>
+      <button onclick="openReport()">Submit Report →</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="container">
+    <div class="section-head"><div class="eyebrow">Overview</div><h2>Discord reporting</h2><p class="sub">Only one reporting destination is available on this portal: Discord.</p></div>
+    <div class="stats">
+      <div class="stat"><div class="number" id="totalStat">—</div><div class="label">submitted report records</div></div>
+      <div class="stat"><div class="number" id="reviewedStat">—</div><div class="label">reports reviewed</div></div>
+      <div class="stat"><div class="number" id="pendingStat">—</div><div class="label">reports pending</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:10px"><div class="container"><div class="platform"><div class="discord-icon">◌</div><div><h3>DISCORD</h3><p>Online-content reports and archived Discord submissions</p></div></div></div></section>
+
+<section id="reports">
+<div class="container">
+<div class="section-head"><div class="live"><span class="dot"></span> Live feed <span style="color:#666;font-weight:500;letter-spacing:0;text-transform:none">Firebase connected · public + private reports</span></div><h2>EMPÍRE Reports & Applications</h2><p class="sub">Choose a report or application, select how to submit it, then choose whether a website submission should be public or private.</p></div>
+<div class="tabs service-tabs">
+<button class="tab active" data-service="discord-user">Discord Member Report</button>
+<button class="tab" data-service="empire-product">EMPÍRE Product Report</button>
+<button class="tab" data-service="moderator-application">Discord Moderator Application</button>
+<button class="tab" data-service="employee-application">Employee Application</button>
+</div>
+<div class="panel report-builder">
+<div class="report-mode"><span class="mode-label">Submission method</span><button type="button" class="mode active" data-mode="website">1 · Via Website</button><button type="button" class="mode" data-mode="email">2 · Via Email</button></div>
+<form id="reportForm" class="report-form">
+<input type="hidden" id="selectedService" value="discord-user"><input type="hidden" id="selectedMode" value="website">
+<div id="userFields" class="service-fields">
+<div class="field-grid"><label>Member username<input id="userName" placeholder="@username"></label><label>Display name<input id="displayName" placeholder="Member's display name"></label></div>
+<label>Role (optional)<input id="memberRole" placeholder="e.g. Moderator, Member"></label>
+<label>Reason for report<textarea id="userDescription" placeholder="Explain what happened and why it should be reviewed..."></textarea></label>
+</div>
+<div id="productFields" class="service-fields" style="display:none">
+<div class="safe-notice"><strong>EMPÍRE product report:</strong> Choose the product and describe the issue.</div>
+<div><div class="pick-label">Select product</div><div class="chips" id="productChips"><button type="button" class="chip" data-product="Loud Tools">Loud Tools</button><button type="button" class="chip" data-product="Webhooks">Webhooks</button><button type="button" class="chip" data-product="Quest Solver">Quest Solver</button><button type="button" class="chip" data-product="Bot Control Portal">Bot Control Portal</button></div></div>
+<input type="hidden" id="productChoice" value="">
+<label>Your username (optional)<input id="productReporter" placeholder="Your public username"></label>
+<label>Reason for report<textarea id="productReason" placeholder="Describe the issue or feedback..."></textarea></label>
+</div>
+<div id="moderatorFields" class="service-fields" style="display:none">
+<div class="safe-notice"><strong>EMPÍRE Discord moderator application:</strong> Answer the questions below. Applications can be public or private.</div>
+<label>Discord username<input id="modUsername" placeholder="@username"></label>
+<label>Why do you want to become an EMPÍRE moderator?<textarea id="modWhy"></textarea></label>
+<label>How would you handle a member breaking server rules?<textarea id="modRules"></textarea></label>
+<label>What would you do if two members started arguing?<textarea id="modConflict"></textarea></label>
+<label>How active can you be in the server?<input id="modActivity" placeholder="e.g. 1–2 hours daily"></label>
+<label>Email address (optional)<input id="modEmail" type="email" autocomplete="email" placeholder="you@example.com"><span class="field-note">Please provide an email address — we may reply to you by email if you are selected as a moderator. It is optional, and it is never shown publicly.</span></label>
+</div>
+<div id="employeeFields" class="service-fields" style="display:none">
+<div class="safe-notice"><strong>Become an EMPÍRE employee:</strong> Select your skills and tell us what you can contribute.</div>
+<label>Discord username<input id="employeeUsername" placeholder="@username"></label>
+<div><div class="pick-label">Areas of expertise (select all that apply)</div><div class="chips expertise-chips">
+<button type="button" class="chip" data-skill="HTML">HTML</button><button type="button" class="chip" data-skill="CSS">CSS</button><button type="button" class="chip" data-skill="JavaScript">JavaScript</button><button type="button" class="chip" data-skill="Node.js">Node.js</button><button type="button" class="chip" data-skill="Python">Python</button><button type="button" class="chip" data-skill="Automation script">Automation script</button><button type="button" class="chip" data-skill="Discord bot">Discord bot</button>
+</div></div>
+<label>Skills, experience, and what you can contribute<textarea id="employeeExperience" placeholder="Tell us about your skills, experience, projects, or ideas..."></textarea></label>
+<label>Email address (optional)<input id="employeeEmail" type="email" autocomplete="email" placeholder="you@example.com"><span class="field-note">Please provide an email address — we may contact you by email if your application is selected for the team. It is optional, and it is never shown publicly.</span></label>
+</div>
+<div id="visibilityWrap" class="service-fields"><div class="pick-label">Website visibility</div><div class="chips"><button type="button" class="chip active" data-visibility="public">Public — visible to everyone</button><button type="button" class="chip" data-visibility="private">Private — admin only</button></div><input type="hidden" id="visibilityChoice" value="public"><div class="notice">Public submissions may be visible to anyone. Do not include passwords, verification codes, or sensitive personal information.</div></div>
+<div class="upload-box"><div><strong>Attachments</strong><p>Image previews are local only; files are not uploaded to Firebase Storage.</p></div><label class="upload-btn">+ Add images / photos<input id="evidenceFiles" type="file" accept="image/*" multiple hidden></label><div id="previewGrid" class="preview-grid"></div></div>
+<div class="submit-row"><div class="notice">Website submissions are saved to Firebase. Private submissions stay out of the public feed. Email mode opens a prefilled email to <strong id="mailTarget">noreply@errorr.work.gd</strong>.</div><button id="submitReportBtn" class="primary" type="submit">Submit Report →</button></div>
+</form></div>
+</div>
+</section>
+<section>
+<div class="container"><div class="section-head"><div class="eyebrow">Archive</div><h2>EMPÍRE Archive</h2><p class="sub">Public submissions appear in the community status table. Private submissions are only available to authorized administrators.</p></div>
+<div class="cards">
+<div class="archive-card"><div class="archive-top"><div class="archive-icon">◌</div><div><h3>DISCORD</h3><div class="small">Online content</div></div></div><div class="big" id="archiveTotal">Private</div><div class="small" id="archiveBreakdown">Use the administrator console for aggregate statistics.</div><div class="range">Live Firebase archive</div></div>
+<div class="archive-card"><div class="archive-top"><div class="archive-icon">↗</div><div><h3>REPORTING PORTAL</h3><div class="small">Reports and applications</div></div></div><div class="big">1 active channel</div><div class="small">Submit and track reports from one place.</div><div class="range">Live system</div></div>
+</div></div>
+</section>
+
+<section id="status">
+<div class="container">
+<div class="section-head"><div class="eyebrow">Public status</div><h2>Community Report Status</h2><p class="sub">Public website submissions and their current status. Private reports and private applications never appear in this table.</p></div>
+<div class="panel public-table-panel"><div class="toolbar public-filters"><label>Status<select id="publicStatusFilter"><option value="all">All statuses</option><option>Pending</option><option>Under Review</option><option>Action Required</option><option>Approved</option><option>Completed</option><option>Rejected</option></select></label><label>Date<input id="publicDateFilter" placeholder="Filter date (e.g. 10/9/2026)"></label><label>Reporter<input id="publicReporterFilter" placeholder="Filter username..."></label><label>Content<input id="publicContentFilter" placeholder="Filter report details..."></label></div>
+<div class="table-scroll"><table class="public-report-table"><thead><tr><th>Status</th><th>Date</th><th>Reporter</th><th>Type</th><th>Content</th></tr></thead><tbody id="publicReportsBody"><tr><td colspan="5" class="empty">Loading public reports from Firebase…</td></tr></tbody></table></div>
+<div class="pagination"><span id="publicPageInfo">Loading…</span><div><button type="button" id="publicPrev" disabled>‹ Back</button><button type="button" id="publicNext" disabled>Next ›</button></div></div>
+</div>
+<div class="section-head" style="margin-top:54px"><div class="eyebrow">Private tracking</div><h2>Check Your Report</h2><p class="sub">Enter the Report ID you received after a website submission to check its status and any administrator response.</p></div>
+<div class="track-panel"><form id="trackForm" class="track-form"><input id="trackIdInput" autocomplete="off" placeholder="e.g. OD-7K4M2X9P"><button class="primary" type="submit">Check Report →</button></form><div class="security-line">Keep your Report ID private. Private submissions are visible only to the administrator and can be checked by the person holding the ID.</div><div id="trackResult" class="track-result"><div class="empty">Enter your Report ID above.</div></div></div>
+</div></section>
+<section><div class="container"><div class="report-box"><div><h3>Submit a Discord report</h3><p>Send a report for review through this portal.</p></div><button class="primary" onclick="openReport()">Submit Report →</button></div></div></section>
+
+<section id="adminSection" class="admin-hidden admin-section">
+<div class="container">
+<div class="section-head"><div class="eyebrow">Private dashboard</div><h2>Administrator Console</h2><p class="sub">Manage reports stored in Firestore. Set an official status and send a response to the reporter.</p></div>
+<div class="panel">
+<div class="toolbar" style="grid-template-columns:1fr 1fr 1fr"><select id="adminFilter"><option value="all">All reports</option><option value="Pending">Pending</option><option value="Under Review">Under Review</option><option value="Action Required">Action Required</option><option value="Approved">Approved</option><option value="Completed">Completed</option><option value="Rejected">Rejected</option></select><button class="primary" onclick="loadAdminReports()">Refresh reports</button><button onclick="adminLogout()">Lock admin panel</button></div>
+<div id="adminReports" style="padding:18px"></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container"><strong>Operation @EMPÍRE</strong> · Reports and applications portal.
+<span style="float:right">Independent interface · Not affiliated with Discord or Google.</span><br>
+<span style="display:block;margin-top:10px">© 2026 Operation @EMPÍRE · All rights reserved · <span class="secret-link" onclick="openAdminLogin()">Records</span></span>
+</div>
+</footer>
+
+<div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h3>Report form</h3><button class="close" onclick="closeReport()">×</button></div><p style="color:#888">Use the full reporting form above to choose a service, submission method, and attachments.</p><a class="btn primary" href="#reports" onclick="closeReport()">Open Report Form</a></div></div>
+
+<div class="modal" id="successModal"><div class="modal-box"><div class="modal-head"><h3>Report Submitted</h3><button class="close" onclick="closeSuccessModal()">×</button></div><p style="color:#888">Your report has been submitted. Save this Report ID so you can check its status later.</p><div class="track-card" style="margin-top:18px"><div class="track-id" style="margin:0 0 6px">REPORT ID</div><div id="successReportId" style="font-size:25px;font-weight:800;letter-spacing:.06em"></div><div class="actions" style="margin-top:16px"><button id="copyReportIdBtn" class="copy-btn">Copy Report ID</button><button class="primary" onclick="closeSuccessModal();document.getElementById('status').scrollIntoView({behavior:'smooth'})">Check Status →</button></div></div></div></div>
+
+<div class="modal" id="adminModal"><div class="modal-box"><div class="modal-head"><h3>Administrator Access</h3><button class="close" onclick="closeAdminLogin()">×</button></div><p style="color:#888">Private console login.</p><form id="adminLoginForm" class="form"><label>Email<input id="adminEmail" type="email" autocomplete="username" placeholder="Administrator email"></label><label>Password<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Password"></label><button class="primary" type="submit">Login →</button><div class="notice">Administrator access uses Firebase Authentication. The password is not stored in this HTML.</div></form></div></div>
+
+<div class="toast" id="toast">Ready.</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs, getDoc, query, orderBy, where, limit, setDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCtY37iTEFGcocjy8bwrPuJefHaiK4CiM4",
+  authDomain: "operator-discord-600fd.firebaseapp.com",
+  projectId: "operator-discord-600fd",
+  storageBucket: "operator-discord-600fd.firebasestorage.app",
+  messagingSenderId: "736123366676",
+  appId: "1:736123366676:web:782cbfb855298ed0452601",
+  measurementId: "G-XXQFT1RKSY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const ADMIN_EMAIL = "noreply@errorr.work.gd";
+
+const serviceTabs=document.querySelectorAll(".service-tabs .tab");
+const modeButtons=document.querySelectorAll(".mode");
+const selectedService=document.getElementById("selectedService");
+const selectedMode=document.getElementById("selectedMode");
+const submitBtn=document.getElementById("submitReportBtn");
+const MAIL_DEFAULT="noreply@errorr.work.gd",MAIL_EMPIRE="contact@empire.2bd.net";
+function mailTo(service){return service==="empire-product"?MAIL_EMPIRE:MAIL_DEFAULT}
+
+function switchService(service){
+ selectedService.value=service;
+ serviceTabs.forEach(b=>b.classList.toggle("active",b.dataset.service===service));
+ document.querySelectorAll("#reportForm .service-fields").forEach(x=>x.style.display="none");
+ const map={"discord-user":"userFields","empire-product":"productFields","moderator-application":"moderatorFields","employee-application":"employeeFields"};
+ document.getElementById(map[service]).style.display="grid";
+ document.getElementById("visibilityWrap").style.display=selectedMode.value==="website"?"grid":"none";
+ document.getElementById("mailTarget").textContent=mailTo(service);
+}
+serviceTabs.forEach(b=>b.addEventListener("click",()=>switchService(b.dataset.service)));
+const productChips=document.querySelectorAll("#productChips .chip");
+productChips.forEach(c=>c.addEventListener("click",()=>{
+ document.getElementById("productChoice").value=c.dataset.product;
+ productChips.forEach(x=>x.classList.toggle("active",x===c));
+ document.getElementById("productReason").focus();
+}));
+function resetProduct(){document.getElementById("productChoice").value="";productChips.forEach(x=>x.classList.remove("active"));}
+
+document.querySelectorAll("[data-visibility]").forEach(c=>c.addEventListener("click",()=>{document.querySelectorAll("[data-visibility]").forEach(x=>x.classList.toggle("active",x===c));document.getElementById("visibilityChoice").value=c.dataset.visibility;}));
+let selectedSkills=[];
+document.querySelectorAll("[data-skill]").forEach(c=>c.addEventListener("click",()=>{const skill=c.dataset.skill;if(selectedSkills.includes(skill))selectedSkills=selectedSkills.filter(x=>x!==skill);else selectedSkills.push(skill);c.classList.toggle("active",selectedSkills.includes(skill));}));
+
+
+function switchMode(mode){
+ selectedMode.value=mode;
+ modeButtons.forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+ submitBtn.textContent=mode==="email"?"Open Email →":"Submit Report →";
+ document.getElementById("visibilityWrap").style.display=mode==="website"?"grid":"none";
+}
+modeButtons.forEach(b=>b.addEventListener("click",()=>switchMode(b.dataset.mode)));
+
+const fileInput=document.getElementById("evidenceFiles"), previewGrid=document.getElementById("previewGrid");
+let selectedFiles=[];
+fileInput.addEventListener("change",()=>{selectedFiles=Array.from(fileInput.files||[]);renderPreviews()});
+function renderPreviews(){
+ previewGrid.innerHTML="";
+ selectedFiles.forEach((file,index)=>{
+  const reader=new FileReader();
+  reader.onload=e=>{
+   const item=document.createElement("div");item.className="preview";
+   const img=document.createElement("img");img.src=e.target.result;img.alt="Evidence "+(index+1);
+   const btn=document.createElement("button");btn.type="button";btn.textContent="×";
+   btn.onclick=()=>{selectedFiles.splice(index,1);renderPreviews()};
+   item.append(img,btn);previewGrid.appendChild(item);
+  };reader.readAsDataURL(file);
+ });
+}
+function value(id){return(document.getElementById(id)?.value||"").trim()}
+
+function generateReportId(){
+ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+ const bytes=new Uint8Array(12);
+ crypto.getRandomValues(bytes);
+ let out="OD-";
+ for(const b of bytes) out+=chars[b%chars.length];
+ return out;
+}
+
+function getReportData(){
+ const service=selectedService.value,visibility=selectedMode.value==="website"?value("visibilityChoice"):"email";
+ const data={service,visibility,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),status:"Pending",statusTag:"Pending",adminReply:"",attachments:selectedFiles.map(f=>f.name)};
+ if(service==="discord-user"){data.userName=value("userName");data.displayName=value("displayName");data.memberRole=value("memberRole");data.reporter=data.userName;data.description=value("userDescription")}
+ else if(service==="empire-product"){data.product=value("productChoice");data.reporter=value("productReporter")||"Anonymous";data.description=value("productReason")}
+ else if(service==="moderator-application"){data.reporter=value("modUsername");data.username=data.reporter;data.application={why:value("modWhy"),rules:value("modRules"),conflict:value("modConflict"),activity:value("modActivity")};data.description="Why: "+data.application.why+"\nRules: "+data.application.rules+"\nConflict: "+data.application.conflict+"\nAvailability: "+data.application.activity}
+ else if(service==="employee-application"){data.reporter=value("employeeUsername");data.username=data.reporter;data.skills=[...selectedSkills];data.experience=value("employeeExperience");data.description="Skills: "+data.skills.join(", ")+"\nExperience: "+data.experience}
+ if(service==="moderator-application")data.contactEmail=value("modEmail");if(service==="employee-application")data.contactEmail=value("employeeEmail");data.isPublic=visibility==="public";return data;
+}
+function validateReport(data){
+ if(data.service==="discord-user"&&(!data.userName||!data.displayName||!data.description))return"Please provide the member username, display name, and reporting reason.";
+ if(data.service==="empire-product"&&(!data.product||!data.description))return"Please select a product and describe the issue.";
+ if(data.service==="moderator-application"&&(!data.reporter||!data.application.why||!data.application.rules||!data.application.conflict||!data.application.activity))return"Please complete all moderator application questions.";
+ if(data.service==="employee-application"&&(!data.reporter||!data.skills.length||!data.experience))return"Please provide your username, select at least one skill, and describe your experience.";
+ if(data.contactEmail&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.contactEmail))return "That email address does not look right. Fix it or leave it empty.";
+ return"";
+}
+async function saveToFirebase(data){
+  const publicId=generateReportId(),now=new Date().toISOString();
+  const {contactEmail,...rest}=data;const inDoc=!!contactEmail&&data.visibility!=="public";const clean={...rest,...(inDoc?{contactEmail}:{}),publicId,createdAt:now,updatedAt:now};
+  try{await withTimeout(setDoc(doc(db,"reports",publicId),clean),20000)}
+  catch(err){
+   if(inDoc&&err?.code==="permission-denied"){const {contactEmail:_x,...noMail}=clean;await withTimeout(setDoc(doc(db,"reports",publicId),noMail),20000)}
+   else if(data.service==="empire-product"&&err?.code==="permission-denied"){
+    const {product,...legacy}=clean;legacy.description="[Product: "+product+"] "+clean.description;
+    await withTimeout(setDoc(doc(db,"reports",publicId),legacy),20000);
+   }else throw err;
+  }
+  if(contactEmail&&!inDoc){try{await withTimeout(setDoc(doc(db,"reportContacts",publicId),{publicId,email:contactEmail,service:data.service,createdAt:now}),15000)}catch(e){console.warn("Contact email not saved",e)}}
+  return publicId;
+}
+function buildEmail(data){
+ const serviceName={"discord-user":"Discord Member Report","empire-product":"EMPÍRE Product Report","moderator-application":"Discord Moderator Application","employee-application":"EMPÍRE Employee Application"}[data.service];
+ const lines=["Operation @EMPÍRE","Service: "+serviceName,"",data.userName?"Username: "+data.userName:"",data.displayName?"Display name: "+data.displayName:"",data.memberRole?"Role: "+data.memberRole:"",data.product?"Product: "+data.product:"",data.reporter?"Reporter: "+data.reporter:"",data.skills?"Skills: "+data.skills.join(", "):"",data.contactEmail?"Email: "+data.contactEmail:"","Visibility: "+(data.visibility||"email"),"",data.description,"","Attachments selected on website: "+(data.attachments.length?data.attachments.join(", "):"None"),"","Security note: passwords, OTPs, verification codes, and backup codes must never be included."];
+ return{subject:"Operation @EMPÍRE — "+serviceName,body:lines.filter(Boolean).join("\n")};
+}
+
+document.getElementById("reportForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const data=getReportData(),error=validateReport(data);
+ if(error){showToast(error);return}
+ if(selectedMode.value==="email"){
+  const mail=buildEmail(data);
+  window.location.href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(mailTo(data.service))+"&su="+encodeURIComponent(mail.subject)+"&body="+encodeURIComponent(mail.body);
+  return;
+ }
+ submitBtn.disabled=true;submitBtn.textContent="Saving…";
+ try{
+  const id=await saveToFirebase(data);
+  e.target.reset();resetProduct();selectedSkills=[];document.querySelectorAll("[data-skill]").forEach(x=>x.classList.remove("active"));document.querySelectorAll("[data-visibility]").forEach(x=>x.classList.toggle("active",x.dataset.visibility==="public"));document.getElementById("visibilityChoice").value="public";selectedFiles=[];fileInput.value="";renderPreviews();switchService("discord-user");switchMode("website");
+  showSuccessModal(id);
+ }catch(err){console.error(err);showToast(friendlyError(err,"Could not save report. Check Firebase rules/connection."))}
+ finally{submitBtn.disabled=false;submitBtn.textContent="Submit Report →"}
+});
+
+function openReport(){document.getElementById("modal").classList.add("show")}
+function closeReport(){document.getElementById("modal").classList.remove("show")}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeReport()});
+window.openReport=openReport;window.closeReport=closeReport;
+
+function showSuccessModal(id){document.getElementById("successReportId").textContent=id;document.getElementById("successModal").classList.add("show")}
+function closeSuccessModal(){document.getElementById("successModal").classList.remove("show")}
+document.getElementById("successModal").addEventListener("click",e=>{if(e.target.id==="successModal")closeSuccessModal()});
+document.getElementById("copyReportIdBtn").addEventListener("click",async()=>{const id=document.getElementById("successReportId").textContent;try{await navigator.clipboard.writeText(id);showToast("Report ID copied.")}catch{showToast("Copy failed. Please save the Report ID manually.")}});
+window.closeSuccessModal=closeSuccessModal;
+
+function openAdminLogin(){
+ if(auth.currentUser?.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase()){showAdmin();return}
+ document.getElementById("adminModal").classList.add("show");document.getElementById("adminEmail").focus()
+}
+function closeAdminLogin(){document.getElementById("adminModal").classList.remove("show")}
+document.getElementById("adminModal").addEventListener("click",e=>{if(e.target.id==="adminModal")closeAdminLogin()});
+window.openAdminLogin=openAdminLogin;window.closeAdminLogin=closeAdminLogin;
+
+let toastTimer;let adminCache=[];
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),4500)}
+function withTimeout(p,ms=15000){return Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej({code:"timeout"}),ms))])}
+function friendlyError(err,fallback="Something went wrong."){
+ const c=err?.code||"";
+ if(c==="permission-denied")return"Permission denied by Firestore rules. Make sure you are signed in as the administrator.";
+ if(c==="timeout")return"This is taking too long. Check your internet connection and try again.";
+ if(c==="unavailable"||c==="auth/network-request-failed")return"Network problem. Check your internet connection and try again.";
+ return fallback+(c?" ("+c+")":"");
+}
+function loginError(err){
+ switch(err?.code){
+  case"auth/invalid-email":return"Email address is wrong. Please check it and try again.";
+  case"auth/user-not-found":return"Email address is wrong. No account was found.";
+  case"auth/wrong-password":return"Password is wrong. Please try again.";
+  case"auth/invalid-credential":case"auth/invalid-login-credentials":return"Email address or password is wrong.";
+  case"auth/too-many-requests":return"Too many attempts. Please wait a few minutes and try again.";
+  case"auth/user-disabled":return"This account has been disabled.";
+  case"auth/network-request-failed":return"Network error. Check your internet connection.";
+  case"auth/operation-not-allowed":return"Email/password sign-in is not enabled in Firebase Authentication.";
+  default:return"Login failed"+(err?.code?" ("+err.code+")":"")+".";
+ }
+}
+document.getElementById("adminLoginForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const email=value("adminEmail"),password=document.getElementById("adminPassword").value;
+  if(!email){showToast("Please enter the administrator email address.");return}
+  if(!password){showToast("Please enter your password.");return}
+  const btn=e.target.querySelector("button[type=submit]");btn.disabled=true;btn.textContent="Signing in…";
+  try{
+   const cred=await withTimeout(signInWithEmailAndPassword(auth,email,password),20000);
+   if(cred.user.email?.toLowerCase()!==ADMIN_EMAIL.toLowerCase()){await signOut(auth);showToast("This account is not an administrator.");return}
+   document.getElementById("adminPassword").value="";
+   showToast("Logged in successfully ✓");showAdmin(true);
+  }catch(err){console.error(err);showToast(err?.code==="timeout"?friendlyError(err):loginError(err))}
+  finally{btn.disabled=false;btn.textContent="Login →"}
+});
+
+function adminLogout(){signOut(auth).then(()=>showToast("Administrator panel locked.")).catch(console.error)}
+window.adminLogout=adminLogout;
+
+onAuthStateChanged(auth,user=>{
+  const isAdmin=!!user&&user.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase();
+  loadPublicReports();
+  if(isAdmin){closeAdminLogin();showAdmin(false);loadAdminReports()}
+  else{adminCache=[];document.getElementById("adminSection").classList.add("admin-hidden");document.getElementById("adminReports").innerHTML="";resetPublicStats()}
+});
+
+function showAdmin(scroll=true){document.getElementById("adminSection").classList.remove("admin-hidden");if(scroll)document.getElementById("adminSection").scrollIntoView({behavior:"smooth"})}
+function formatDate(iso){if(!iso)return"—";const d=new Date(iso);return isNaN(d)?"—":d.toLocaleString()}
+function normalizeStatus(s){return s==="Reviewed"?"Under Review":s||"Pending"}
+function statusClass(s){return normalizeStatus(s).toLowerCase().replace(/\s+/g,"-")}
+function serviceName(s){return({"discord-user":"Discord Member Report","empire-product":"EMPÍRE Product Report","moderator-application":"Moderator Application","employee-application":"Employee Application"})[s]||s}
+
+async function getReports(){
+ if(auth.currentUser?.email?.toLowerCase()!==ADMIN_EMAIL.toLowerCase())throw new Error("Administrator authentication.");
+ const snap=await getDocs(query(collection(db,"reports"),orderBy("createdAt","desc")));
+ const list=snap.docs.map(x=>({_id:x.id,...x.data()}));
+ try{const cs=await getDocs(collection(db,"reportContacts"));const m={};cs.forEach(c=>m[c.id]=c.data().email);list.forEach(r=>{if(m[r.publicId||r._id])r.contactEmail=m[r.publicId||r._id]})}catch(e){console.warn("Contacts unavailable",e)}
+ return list;
+}
+
+function renderStats(reports){
+  const total=reports.length,reviewed=reports.filter(r=>["Under Review","Approved","Completed","Reviewed"].includes(normalizeStatus(r.status))).length,pending=reports.filter(r=>normalizeStatus(r.status)==="Pending").length,rejected=reports.filter(r=>normalizeStatus(r.status)==="Rejected").length;
+  document.getElementById("totalStat").textContent=total.toLocaleString();document.getElementById("reviewedStat").textContent=reviewed.toLocaleString();document.getElementById("pendingStat").textContent=pending.toLocaleString();document.getElementById("archiveTotal").textContent=total.toLocaleString()+" reports";document.getElementById("archiveBreakdown").textContent=`${reviewed} reviewed · ${pending} pending · ${rejected} rejected`;
+}
+async function loadAdminReports(){
+  const box=document.getElementById("adminReports");box.innerHTML='<div class="empty">Loading reports…</div>';
+  try{adminCache=await withTimeout(getReports(),20000);renderStats(adminCache);renderAdminList()}
+  catch(err){console.error(err);box.innerHTML='<div class="empty">Could not load reports. '+escapeHtml(friendlyError(err,"Make sure the administrator is signed in and Firestore rules match this HTML."))+'</div>'}
+}
+function renderAdminList(){
+  const box=document.getElementById("adminReports"),filter=document.getElementById("adminFilter").value;
+  const filtered=filter==="all"?adminCache:adminCache.filter(r=>normalizeStatus(r.status)===filter);
+  if(!filtered.length){box.innerHTML='<div class="empty">No reports found.</div>';return}
+  box.innerHTML="";
+  filtered.forEach(r=>{
+    const card=document.createElement("div");card.className="admin-card";
+    const details=[r.product?`Product: ${escapeHtml(r.product)}`:"",r.userName?`Username: ${escapeHtml(r.userName)}`:"",r.displayName?`Display name: ${escapeHtml(r.displayName)}`:"",r.memberRole?`Role: ${escapeHtml(r.memberRole)}`:"",r.reporter?`Reporter: ${escapeHtml(r.reporter)}`:"",r.skills?`Skills: ${escapeHtml(r.skills.join(", "))}`:"",r.experience?`Experience: ${escapeHtml(r.experience)}`:"",r.contactEmail?`Email: ${escapeHtml(r.contactEmail)}`:"",r.visibility?`Visibility: <strong>${escapeHtml(String(r.visibility).toUpperCase())}</strong>`:""].filter(Boolean).join("<br>");
+    const current=normalizeStatus(r.status);
+    card.innerHTML=`<div class="admin-card-top"><div><strong>${escapeHtml(serviceName(r.service))}</strong><span class="vis-pill">${r.visibility==="public"?"PUBLIC":"PRIVATE"}</span><div class="admin-meta">${formatDate(r.createdAt)} · Report ID: ${escapeHtml(r.publicId||r._id)}</div></div><span class="status ${statusClass(current)}">${escapeHtml(current)}</span></div><div class="report-detail" style="margin-top:12px">${details||"No extra fields"}<br><br><strong>Description:</strong><br>${escapeHtml(r.description||"No description")}</div><div class="admin-edit-grid"><label>Status / Tag<select class="admin-status-select"><option ${current==="Pending"?"selected":""}>Pending</option><option ${current==="Under Review"?"selected":""}>Under Review</option><option ${current==="Action Required"?"selected":""}>Action Required</option><option ${current==="Approved"?"selected":""}>Approved</option><option ${current==="Completed"?"selected":""}>Completed</option><option ${current==="Rejected"?"selected":""}>Rejected</option></select></label><label>Administrator response<textarea class="reply-textarea" placeholder="Write the response the reporter will see...">${escapeHtml(r.adminReply||"")}</textarea></label></div><div class="admin-actions" style="margin-top:12px"><button class="small-btn success save-update">Save status + reply</button><button class="small-btn danger delete-report">Delete</button></div><div class="admin-meta updated-line" style="margin-top:9px">Last updated: ${escapeHtml(formatDate(r.updatedAt||r.createdAt))}</div>`;
+    card.querySelector(".save-update").onclick=()=>saveReportUpdate(r._id,card);
+    card.querySelector(".delete-report").onclick=()=>deleteReport(r._id);
+    box.appendChild(card);
+  });
+}
+
+async function saveReportUpdate(id,card){
+  const btn=card.querySelector(".save-update"),status=card.querySelector(".admin-status-select").value,reply=card.querySelector(".reply-textarea").value.trim();
+  const patch={status,statusTag:status,adminReply:reply,updatedAt:new Date().toISOString()};
+  btn.disabled=true;btn.textContent="Saving…";
+  try{
+   await withTimeout(updateDoc(doc(db,"reports",id),patch),15000);
+   const i=adminCache.findIndex(x=>x._id===id);if(i>-1)Object.assign(adminCache[i],patch);
+   const badge=card.querySelector(".admin-card-top .status");badge.textContent=status;badge.className="status "+statusClass(status);
+   card.querySelector(".updated-line").textContent="Last updated: "+formatDate(patch.updatedAt);
+   renderStats(adminCache);loadPublicReports();showToast("Report updated successfully ✓");
+  }catch(err){console.error(err);showToast(friendlyError(err,"Could not update this report."))}
+  finally{btn.disabled=false;btn.textContent="Save status + reply"}
+}
+
+async function deleteReport(id){
+  if(!confirm("Delete this report permanently?"))return;
+  try{await withTimeout(deleteDoc(doc(db,"reports",id)),15000);adminCache=adminCache.filter(x=>x._id!==id);renderStats(adminCache);renderAdminList();loadPublicReports();showToast("Report deleted.")}
+  catch(err){console.error(err);showToast(friendlyError(err,"Could not delete this report."))}
+}
+window.loadAdminReports=loadAdminReports;window.deleteReport=deleteReport;
+
+function escapeHtml(str){return String(str??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"})[m])}
+function resetPublicStats(){document.getElementById("totalStat").textContent="—";document.getElementById("reviewedStat").textContent="—";document.getElementById("pendingStat").textContent="—";document.getElementById("archiveTotal").textContent="Private";document.getElementById("archiveBreakdown").textContent="Use the administrator console for aggregate statistics."}
+
+let trackedId="";
+async function fetchTrack(input,silent=false){
+  const result=document.getElementById("trackResult");
+  if(!silent)result.innerHTML='<div class="empty">Checking report…</div>';
+  try{
+   const snap=await withTimeout(getDoc(doc(db,"reports",input)),15000);
+   if(!snap.exists()||snap.data().publicId!==input){if(!silent)result.innerHTML='<div class="empty">No report was found for that Report ID.</div>';return}
+   const r=snap.data();
+   const status=normalizeStatus(r.status||r.statusTag),reply=r.adminReply?.trim();
+   result.innerHTML=`<div class="track-card"><div class="track-head"><div><strong>${escapeHtml(serviceName(r.service))}</strong><div class="track-id">${escapeHtml(r.publicId)}</div></div><span class="status ${statusClass(status)}">${escapeHtml(status)}</span></div><div style="margin-top:14px;color:#888;font-size:13px">Submitted: ${escapeHtml(formatDate(r.createdAt))}</div><div style="margin-top:4px;color:#888;font-size:13px">Last updated: ${escapeHtml(formatDate(r.updatedAt||r.createdAt))}</div><div class="track-reply"><div class="label">Administrator response</div><div class="text">${reply?escapeHtml(reply):"No administrator response has been posted yet."}</div></div></div>`;
+  }catch(err){console.error(err);if(!silent)result.innerHTML='<div class="empty">Could not check this report right now. Please try again.</div>'}
+}
+
+let publicReportsCache=[],publicPage=1;const PUBLIC_PAGE_SIZE=10;
+function publicReportText(r){return String(r.product?"Product: "+r.product+" — ":"")+String(r.displayName||r.userName||r.username||"")+String(r.memberRole?" · "+r.memberRole:"")+String(r.description||"").slice(0,240)}
+function renderPublicReports(){
+ const status=value("publicStatusFilter"),date=value("publicDateFilter").toLowerCase(),reporter=value("publicReporterFilter").toLowerCase(),content=value("publicContentFilter").toLowerCase();
+ const rows=publicReportsCache.filter(r=>normalizeStatus(r.status) && (status==="all"||normalizeStatus(r.status)===status) && (!date||formatDate(r.createdAt).toLowerCase().includes(date)) && (!reporter||String(r.reporter||"Anonymous").toLowerCase().includes(reporter)) && (!content||publicReportText(r).toLowerCase().includes(content)));
+ const pages=Math.max(1,Math.ceil(rows.length/PUBLIC_PAGE_SIZE));publicPage=Math.min(publicPage,pages);const slice=rows.slice((publicPage-1)*PUBLIC_PAGE_SIZE,publicPage*PUBLIC_PAGE_SIZE);const body=document.getElementById("publicReportsBody");
+ body.innerHTML=slice.length?slice.map(r=>`<tr><td><span class="status ${statusClass(normalizeStatus(r.status))}">${escapeHtml(normalizeStatus(r.status))}</span></td><td>${escapeHtml(formatDate(r.createdAt).split(",")[0])}</td><td>${escapeHtml(r.reporter||"Anonymous")}</td><td>${escapeHtml(serviceName(r.service))}</td><td>${escapeHtml(publicReportText(r)||"Report submitted")}${r.adminReply?`<div class="pub-reply"><strong>Admin reply:</strong> ${escapeHtml(r.adminReply)}</div>`:""}</td></tr>`).join(""):'<tr><td colspan="5" class="empty">No public reports match these filters.</td></tr>';
+ document.getElementById("publicPageInfo").textContent=`${rows.length.toLocaleString()} results · Page ${publicPage} of ${pages}`;document.getElementById("publicPrev").disabled=publicPage<=1;document.getElementById("publicNext").disabled=publicPage>=pages;
+}
+async function loadPublicReports(){
+ const body=document.getElementById("publicReportsBody");
+ try{const snap=await withTimeout(getDocs(query(collection(db,"reports"),where("visibility","==","public"),limit(500))),20000);publicReportsCache=snap.docs.map(d=>({_id:d.id,...d.data()})).filter(r=>r.isPublic!==false).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));renderPublicReports();}
+ catch(err){console.error(err);body.innerHTML='<tr><td colspan="5" class="empty">Could not load public reports. Your current Firebase rules do not let visitors who are not logged in read public reports.</td></tr>';document.getElementById("publicPageInfo").textContent="Public feed unavailable"}
+}
+["publicStatusFilter","publicDateFilter","publicReporterFilter","publicContentFilter"].forEach(id=>document.getElementById(id).addEventListener(id==="publicStatusFilter"?"change":"input",()=>{publicPage=1;renderPublicReports()}));
+document.getElementById("publicPrev").addEventListener("click",()=>{if(publicPage>1){publicPage--;renderPublicReports()}});document.getElementById("publicNext").addEventListener("click",()=>{publicPage++;renderPublicReports()});
+
+document.getElementById("trackForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const input=value("trackIdInput").toUpperCase(),result=document.getElementById("trackResult");
+  if(!input){trackedId="";result.innerHTML='<div class="empty">Enter a Report ID first.</div>';return}
+  trackedId=input;fetchTrack(input);
+});
+setInterval(()=>{if(trackedId&&!document.hidden)fetchTrack(trackedId,true)},15000);
+
+document.getElementById("adminFilter").addEventListener("change",renderAdminList);
+switchService("discord-user");switchMode("website");resetPublicStats();loadPublicReports();
+</script>
+</body>
+</html>
